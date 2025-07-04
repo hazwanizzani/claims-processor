@@ -1,0 +1,23 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: kafka-consumer
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          auto-create-topics: true
+      bindings:
+        processClaims-in-0:
+          destination: insurance-claims
+          group: claims-processing-group
+          content-type: application/json
+      function:
+        definition: processClaims
+
+logging:
+  level:
+    com.workshop: INFO
